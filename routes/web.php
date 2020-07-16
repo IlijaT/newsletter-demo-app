@@ -15,10 +15,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
-});
+})->name('home-page');
 
 Route::post('newsletters/subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
-Route::get('campaigns/create', 'NewsletterCampaignController@create')->name('campaigns.create');
-Route::post('campaigns', 'NewsletterCampaignController@store')->name('campaigns.store');
+Route::get('campaigns/create', 'CampaignsController@create')->name('campaigns.create');
+Route::post('campaigns', 'CampaignsController@store')->name('campaigns.store');
 
 

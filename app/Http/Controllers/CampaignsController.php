@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Newsletter;
 use Spatie\Newsletter\Newsletter as NewsletterNewsletter;
 
-class NewsletterCampaignController extends Controller
+class CampaignsController extends Controller
 {
     public function create()
     {
