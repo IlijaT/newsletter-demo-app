@@ -19,7 +19,7 @@
 <body>
 
     <div class="w-full">
-        <nav class="bg-gray-300 shadow-lg">
+        <nav class="bg-purple-200">
             <div class="md:flex items-center justify-between py-2 px-8 md:px-12">
                 <div class="flex justify-between items-center">
                    <div class="text-2xl font-bold text-gray-800 md:text-3xl">
@@ -35,7 +35,7 @@
                     </div>
                 </div>
                 <div class="flex flex-col md:flex-row hidden md:block -mx-2">
-                    <x-navbar-item>Campaigns</x-navbar-item>
+                    <x-navbar-item link="{{ route('campaigns.index') }}">Campaigns</x-navbar-item>
                     <x-navbar-item>About</x-navbar-item>
                     <x-navbar-item>Contact</x-navbar-item> 
                 </div>

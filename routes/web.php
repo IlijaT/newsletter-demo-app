@@ -18,6 +18,8 @@ Route::get('/', function () {
 })->name('home-page');
 
 Route::post('newsletters/subscribe', 'NewsletterController@subscribe')->name('newsletter.subscribe');
+
+Route::get('campaigns', 'CampaignsController@index')->name('campaigns.index');
 Route::get('campaigns/create', 'CampaignsController@create')->name('campaigns.create');
 Route::post('campaigns', 'CampaignsController@store')->name('campaigns.store');
 
