@@ -21,7 +21,7 @@ $factory->define(Campaign::class, function (Faker $faker) {
         'delete_url' => $faker->url,
         'emails_sent' => null,
         'from_name' => $faker->word,
-        'hash_list_id' => Str::random(10),
-        'campaign_list_id' => 1,
+        'hash_list_id' =>$faker->swiftBicNumber,
+        'campaign_list_id' => factory(CampaignList::class),
     ];
 });

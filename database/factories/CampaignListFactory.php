@@ -8,7 +8,8 @@ use Faker\Generator as Faker;
 
 $factory->define(CampaignList::class, function (Faker $faker) {
     return [
-        'email' => $faker->email,
-        'campaign_id' => factory(Campaign::class)
+        'hash_id' => $faker->swiftBicNumber,
+        'title' => 'Learn Web Development',
+        'is_active' => true,
     ];
 });
