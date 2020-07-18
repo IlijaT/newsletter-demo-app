@@ -16,7 +16,7 @@ class NewsletterCampaign implements NewsletterCampaignInterface
     
     public function create($fromName,$replyTo,$subject,$html,$listName,$options,$contentOptions) 
     {
-
+        $this->mailchimp->createCampaign($fromName,$replyTo,$subject,$html,$listName,$options,$contentOptions);
     }
 
     public function send() 

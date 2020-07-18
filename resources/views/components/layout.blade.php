@@ -42,26 +42,36 @@
             </div>
         </nav>
 
-        {{-- <x-flash>    
-            <x-slot name="title">
-                Success!!!
-            </x-slot>
-            Newsletter is sent!
-        </x-flash>
-    
+        @if (session('success'))
+            <x-flash>    
+                <x-slot name="title">
+                    Success!!!
+                </x-slot>
+                {{ session('success') }}
+            </x-flash>
+        @endif
+
+        @if ($errors->any())
+            <x-flash type="error">    
+                <x-slot name="title">
+                    Validation errors!
+                </x-slot>
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </x-flash>
+        @endif
+
+        {{-- 
         <x-flash type="warning">    
             <x-slot name="title">
                 Warning!!!
             </x-slot>
             Subscription expired!!!
         </x-flash>
-    
-        <x-flash type="error">    
-            <x-slot name="title">
-                Server Error
-            </x-slot>
-            Newsletter is not sent!
-        </x-flash> --}}
+         --}}
 
         <div class="flex bg-pink-200 h-screen">
             {{ $slot }}

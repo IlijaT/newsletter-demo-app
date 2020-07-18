@@ -3,12 +3,19 @@
 namespace App\Http\Controllers;
 
 use App\Campaign;
+use App\Newsletters\NewsletterCampaign;
 use Illuminate\Http\Request;
 use Newsletter;
 use Spatie\Newsletter\Newsletter as NewsletterNewsletter;
 
 class CampaignsController extends Controller
 {
+
+    protected $mailchimpCampaign;
+
+    public function __construct(NewsletterCampaign $newsletterCampaign) {
+        $this->mailchimpCampaign = $newsletterCampaign;
+    }
 
     public function index()
     {
@@ -23,12 +30,27 @@ class CampaignsController extends Controller
 
     public function store()
     {
+        request()->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'date' => 'required',
+            'text' => 'required'
+        ]);
 
-        Newsletter::createCampaign(
-            'Ilija',
-            "tatalovicilija@gmail.com",
-            'test',
+        $response = $this->mailchimpCampaign->create(
+            $fromName = 'tatalovicilija@gmail.com',
+            $replyTo = 'tatalovicilija@gmail.com',
+            $subject = 'Test Subject',
+            $html = '',
+            $listName = '',
+            $options = [],
+            $contentOptions = []
         );
+
+        // dd($response);
+        // ako je response success, snimi kampanju u bazu 
+
+        session()->flash('success', 'Newsletter campaign has been created successfully!');
 
         return back();
     }
