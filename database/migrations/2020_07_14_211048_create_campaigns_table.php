@@ -15,10 +15,18 @@ class CreateCampaignsTable extends Migration
     {
         Schema::create('campaigns', function (Blueprint $table) {
             $table->id();
-            $table->string('name');
-            $table->date('date');
-            $table->string('subject');
-            $table->text('text');
+            $table->string('hash_id');
+            $table->string('title')->nullable();
+            $table->string('subject')->nullable();
+            $table->text('text')->nullable();
+            $table->string('from_name')->nullable();
+            $table->string('reply_to')->nullable();
+            $table->string('sent_url')->nullable();
+            $table->string('delete_url')->nullable();
+            $table->dateTime('emails_sent')->nullable();
+            $table->dateTime('send_time')->nullable();
+            $table->string('hash_list_id');
+            $table->foreignId('campaign_list_id');
             $table->timestamps();
         });
     }

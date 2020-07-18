@@ -40,14 +40,17 @@ class CampaignsController extends Controller
         $response = $this->mailchimpCampaign->create(
             $fromName = 'tatalovicilija@gmail.com',
             $replyTo = 'tatalovicilija@gmail.com',
-            $subject = 'Test Subject',
+            $subject = 'Test Subject 22',
             $html = '',
             $listName = '',
             $options = [],
             $contentOptions = []
         );
 
-        // dd($response);
+        if(! $response) {
+            session()->flash('warning', 'Something went wrong, please try again later!');
+            return back();
+        }
         // ako je response success, snimi kampanju u bazu 
 
         session()->flash('success', 'Newsletter campaign has been created successfully!');

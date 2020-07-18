@@ -51,6 +51,15 @@
             </x-flash>
         @endif
 
+        @if (session('warning'))
+        <x-flash type="warning">    
+            <x-slot name="title">
+                Warning!!!
+            </x-slot>
+            {{ session('warning') }}
+        </x-flash>
+    @endif
+
         @if ($errors->any())
             <x-flash type="error">    
                 <x-slot name="title">
@@ -63,15 +72,6 @@
                 </ul>
             </x-flash>
         @endif
-
-        {{-- 
-        <x-flash type="warning">    
-            <x-slot name="title">
-                Warning!!!
-            </x-slot>
-            Subscription expired!!!
-        </x-flash>
-         --}}
 
         <div class="flex bg-pink-200 h-screen">
             {{ $slot }}
