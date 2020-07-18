@@ -7,6 +7,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Campaign extends Model
 {
+    protected $guarded = [];
+    
     protected $casts = [
         'date' => 'datetime'
     ];

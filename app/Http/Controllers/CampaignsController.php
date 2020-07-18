@@ -32,15 +32,15 @@ class CampaignsController extends Controller
     {
         request()->validate([
             'name' => 'required',
-            'email' => 'required',
+            'subject' => 'required',
             'date' => 'required',
             'text' => 'required'
         ]);
 
         $response = $this->mailchimpCampaign->create(
-            $fromName = 'tatalovicilija@gmail.com',
-            $replyTo = 'tatalovicilija@gmail.com',
-            $subject = 'Test Subject 22',
+            $fromName = 'fakemail@gmail.com',
+            $replyTo = 'fakemail@gmail.com',
+            $subject =  request('subject'),
             $html = '',
             $listName = '',
             $options = [],
@@ -51,6 +51,22 @@ class CampaignsController extends Controller
             session()->flash('warning', 'Something went wrong, please try again later!');
             return back();
         }
+
+        Campaign::create([
+            'title' => $response['settings']['title'],
+            'hash_id' => $response['id'],
+            'send_time' => $response['send_time'],
+            'subject' => $response['settings']['subject_line'],
+            'text' => null,
+            'from_name' => $response['settings']['from_name'],
+            'reply_to' => $response['settings']['reply_to'],
+            'sent_url' => $response['_links'][3]['href'],
+            'delete_url' => $response['_links'][2]['href'],
+            'emails_sent' => $response['emails_sent'] ? now() : null,
+            'hash_list_id' =>$response['recipients']['list_id'],
+            'campaign_list_id' => $hardcoded = 1,
+        ]);
+        
         // ako je response success, snimi kampanju u bazu 
 
         session()->flash('success', 'Newsletter campaign has been created successfully!');
