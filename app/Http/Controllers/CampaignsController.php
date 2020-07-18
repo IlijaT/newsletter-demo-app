@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Campaign;
 use App\Newsletters\NewsletterCampaign;
+use App\Newsletters\NewsletterList;
 use Illuminate\Http\Request;
 use Newsletter;
 use Spatie\Newsletter\Newsletter as NewsletterNewsletter;
@@ -11,10 +12,12 @@ use Spatie\Newsletter\Newsletter as NewsletterNewsletter;
 class CampaignsController extends Controller
 {
 
-    protected $mailchimpCampaign;
+    protected $newsletterCampaignService;
+    protected $newsletterListService;
 
-    public function __construct(NewsletterCampaign $newsletterCampaign) {
-        $this->mailchimpCampaign = $newsletterCampaign;
+    public function __construct(NewsletterCampaign $newsletterCampaign, NewsletterList $newsletterList) {
+        $this->newsletterCampaignService = $newsletterCampaign;
+        $this->newsletterListService = $newsletterList;
     }
 
     public function index()
@@ -37,7 +40,11 @@ class CampaignsController extends Controller
             'text' => 'required'
         ]);
 
-        $response = $this->mailchimpCampaign->create(
+        $response = $this->newsletterListService->create(request('name'));
+
+        dd($response);
+
+        $response = $this->newsletterCampaignService->create(
             $fromName = 'fakemail@gmail.com',
             $replyTo = 'fakemail@gmail.com',
             $subject =  request('subject'),
